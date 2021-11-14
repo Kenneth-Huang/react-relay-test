@@ -23,8 +23,14 @@ export type CompanyDetailJob_data$key = {
 const node: ReaderFragment = {
   "argumentDefinitions": [
     {
-      "kind": "RootArgument",
+      "defaultValue": null,
+      "kind": "LocalArgument",
       "name": "id"
+    },
+    {
+      "defaultValue": true,
+      "kind": "LocalArgument",
+      "name": "isFetchable"
     }
   ],
   "kind": "Fragment",
@@ -72,5 +78,5 @@ const node: ReaderFragment = {
   "type": "Query",
   "abstractKey": null
 };
-(node as any).hash = '0df29b2b2f2a2ed89556505ccc471931';
+(node as any).hash = '2cd16693c38f5634865c9a1da7822ede';
 export default node;

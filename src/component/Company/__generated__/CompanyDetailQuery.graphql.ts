@@ -7,6 +7,7 @@ import { ConcreteRequest } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type CompanyDetailQueryVariables = {
     id: string;
+    jobID: string;
 };
 export type CompanyDetailQueryResponse = {
     readonly company: {
@@ -30,6 +31,7 @@ export type CompanyDetailQuery = {
 /*
 query CompanyDetailQuery(
   $id: ID!
+  $jobID: ID!
 ) {
   company(id: $id) {
     id
@@ -40,11 +42,11 @@ query CompanyDetailQuery(
       title
     }
   }
-  ...CompanyDetailJob_data
+  ...CompanyDetailJob_data_3SJDCk
 }
 
-fragment CompanyDetailJob_data on Query {
-  job(id: $id) {
+fragment CompanyDetailJob_data_3SJDCk on Query {
+  job(id: $jobID) {
     title
     id
   }
@@ -57,38 +59,42 @@ var v0 = [
     "defaultValue": null,
     "kind": "LocalArgument",
     "name": "id"
-  }
-],
-v1 = [
+  },
   {
-    "kind": "Variable",
-    "name": "id",
-    "variableName": "id"
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "jobID"
   }
 ],
-v2 = {
+v1 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "id",
   "storageKey": null
 },
-v3 = {
+v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
   "name": "title",
   "storageKey": null
 },
-v4 = {
+v3 = {
   "alias": null,
-  "args": (v1/*: any*/),
+  "args": [
+    {
+      "kind": "Variable",
+      "name": "id",
+      "variableName": "id"
+    }
+  ],
   "concreteType": "Company",
   "kind": "LinkedField",
   "name": "company",
   "plural": false,
   "selections": [
-    (v2/*: any*/),
+    (v1/*: any*/),
     {
       "alias": null,
       "args": null,
@@ -111,14 +117,21 @@ v4 = {
       "name": "jobs",
       "plural": true,
       "selections": [
-        (v2/*: any*/),
-        (v3/*: any*/)
+        (v1/*: any*/),
+        (v2/*: any*/)
       ],
       "storageKey": null
     }
   ],
   "storageKey": null
-};
+},
+v4 = [
+  {
+    "kind": "Variable",
+    "name": "id",
+    "variableName": "jobID"
+  }
+];
 return {
   "fragment": {
     "argumentDefinitions": (v0/*: any*/),
@@ -126,9 +139,9 @@ return {
     "metadata": null,
     "name": "CompanyDetailQuery",
     "selections": [
-      (v4/*: any*/),
+      (v3/*: any*/),
       {
-        "args": null,
+        "args": (v4/*: any*/),
         "kind": "FragmentSpread",
         "name": "CompanyDetailJob_data"
       }
@@ -142,31 +155,31 @@ return {
     "kind": "Operation",
     "name": "CompanyDetailQuery",
     "selections": [
-      (v4/*: any*/),
+      (v3/*: any*/),
       {
         "alias": null,
-        "args": (v1/*: any*/),
+        "args": (v4/*: any*/),
         "concreteType": "Job",
         "kind": "LinkedField",
         "name": "job",
         "plural": false,
         "selections": [
-          (v3/*: any*/),
-          (v2/*: any*/)
+          (v2/*: any*/),
+          (v1/*: any*/)
         ],
         "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "98656ecbaa483bbb38eaca3773f54bb9",
+    "cacheID": "b04e112737c15989ebd0da1a1aa477e8",
     "id": null,
     "metadata": {},
     "name": "CompanyDetailQuery",
     "operationKind": "query",
-    "text": "query CompanyDetailQuery(\n  $id: ID!\n) {\n  company(id: $id) {\n    id\n    name\n    description\n    jobs {\n      id\n      title\n    }\n  }\n  ...CompanyDetailJob_data\n}\n\nfragment CompanyDetailJob_data on Query {\n  job(id: $id) {\n    title\n    id\n  }\n}\n"
+    "text": "query CompanyDetailQuery(\n  $id: ID!\n  $jobID: ID!\n) {\n  company(id: $id) {\n    id\n    name\n    description\n    jobs {\n      id\n      title\n    }\n  }\n  ...CompanyDetailJob_data_3SJDCk\n}\n\nfragment CompanyDetailJob_data_3SJDCk on Query {\n  job(id: $jobID) {\n    title\n    id\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = 'f9957f2ee24405a01b2d9e99be188c81';
+(node as any).hash = '1179917d961441a461252e9c9a21c1a8';
 export default node;

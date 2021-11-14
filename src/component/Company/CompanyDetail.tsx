@@ -14,7 +14,7 @@ type CompanyDetailProps = {
   }
 }
 const query = graphql`
-  query CompanyDetailQuery($id: ID!){
+  query CompanyDetailQuery($id: ID!, $jobID: ID!){
     company(id:$id){
       id
         name
@@ -24,51 +24,22 @@ const query = graphql`
           title
         }
       }
-      ...CompanyDetailJob_data
+      ...CompanyDetailJob_data@arguments(id: $jobID)
     }
 `
 
 const CompanyDetail: React.FC<CompanyDetailProps> = (props) => {
       const { companyId } = props.match.params;
 
-  const data = useLazyLoadQuery<any>(query, { id: companyId });
-
+  const data = useLazyLoadQuery<any>(query, { id: companyId, jobID:"ry_1thlPt"});
   return (
     <div>
       <p>{JSON.stringify(data)}</p>
-      <CompanyDetailJob/>
+      <CompanyDetailJob jobs={data.company?.jobs} job={data}/>
+      {/* jobs and job props has to be setted here otherwise a warning will be showed as bellow:*/}
+      {/* Unexpected call to `refetch` while using a null fragment ref for fragment `CompanyDetailJob_data` in `useRefetchableFragment() */}
     </div>
   )
 }
 
 export default CompanyDetail
-
-
-// export class CompanyDetail extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {company: {}};
-//   }
-
-//   async componentDidMount() {
-//     const { companyId } = this.props.match.params;
-//     const company = await fetchCompanyById(companyId);
-//     this.setState({ company });
-//   }
-
-//   render() {
-//     const { company } = this.state;
-//     console.log('company:', company)
-//     if (!company)
-//       return null;
-//     return (
-//       <div>
-//         <h1 className="title">{company.name}</h1>
-//         <div className="box">{company.description}</div>
-//         <h1 className="title is-5">Job at {company.name}</h1>
-//         <JobList jobs={company.jobs}/>
-
-//       </div>
-//     );
-//   }
-// }
