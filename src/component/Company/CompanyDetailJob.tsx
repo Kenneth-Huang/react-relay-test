@@ -8,10 +8,9 @@ import { CompanyDetailJob_data$key } from './__generated__/CompanyDetailJob_data
 const query = graphql`
 	fragment CompanyDetailJob_data on Query
 	@refetchable(queryName: "CompanyDetailJobQuery")
-	@argumentDefinitions(id:{type: "ID!"}, isFetchable:{type: Boolean, defaultValue:true})
-	# @include(if: isFetchable)
+	@argumentDefinitions(id:{type: "ID!"}, isFetchable:{type: Boolean, defaultValue:false})
 	{
-		job(id: $id) {
+		job(id: $id) @include(if: $isFetchable){
 			title
 			id
 		}
@@ -28,11 +27,13 @@ const CompanyDetailJob: React.FC<CompanyDetailJobPropsType> = (props) => {
 	const [data, refetch] = useRefetchableFragment<CompanyDetailJobQuery, any>(query, props.job);
 	
 	const refetchJob = () => {
-		refetch({ id: "rkz1GwOOM" });
+		// debugger
+		refetch({ id: "rkz1GwOOM", isFetchable: true });
 	};
-	useEffect(() => {
-		refetch({ id: "rJKAbDd_z" , isFetchable: true});
-	}, [refetch]);
+	// useEffect(() => {
+	// 	refetch({ id: "rJKAbDd_z" , isFetchable: true});
+	// }, [refetch]);
+	// debugger
 	return (
 		<div>
 			{JSON.stringify(data, null, 2)}

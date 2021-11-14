@@ -31,7 +31,6 @@ export type CompanyDetailQuery = {
 /*
 query CompanyDetailQuery(
   $id: ID!
-  $jobID: ID!
 ) {
   company(id: $id) {
     id
@@ -41,14 +40,6 @@ query CompanyDetailQuery(
       id
       title
     }
-  }
-  ...CompanyDetailJob_data_3SJDCk
-}
-
-fragment CompanyDetailJob_data_3SJDCk on Query {
-  job(id: $jobID) {
-    title
-    id
   }
 }
 */
@@ -74,13 +65,6 @@ v1 = {
   "storageKey": null
 },
 v2 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
-  "name": "title",
-  "storageKey": null
-},
-v3 = {
   "alias": null,
   "args": [
     {
@@ -118,20 +102,19 @@ v3 = {
       "plural": true,
       "selections": [
         (v1/*: any*/),
-        (v2/*: any*/)
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "title",
+          "storageKey": null
+        }
       ],
       "storageKey": null
     }
   ],
   "storageKey": null
-},
-v4 = [
-  {
-    "kind": "Variable",
-    "name": "id",
-    "variableName": "jobID"
-  }
-];
+};
 return {
   "fragment": {
     "argumentDefinitions": (v0/*: any*/),
@@ -139,9 +122,15 @@ return {
     "metadata": null,
     "name": "CompanyDetailQuery",
     "selections": [
-      (v3/*: any*/),
+      (v2/*: any*/),
       {
-        "args": (v4/*: any*/),
+        "args": [
+          {
+            "kind": "Variable",
+            "name": "id",
+            "variableName": "jobID"
+          }
+        ],
         "kind": "FragmentSpread",
         "name": "CompanyDetailJob_data"
       }
@@ -155,29 +144,16 @@ return {
     "kind": "Operation",
     "name": "CompanyDetailQuery",
     "selections": [
-      (v3/*: any*/),
-      {
-        "alias": null,
-        "args": (v4/*: any*/),
-        "concreteType": "Job",
-        "kind": "LinkedField",
-        "name": "job",
-        "plural": false,
-        "selections": [
-          (v2/*: any*/),
-          (v1/*: any*/)
-        ],
-        "storageKey": null
-      }
+      (v2/*: any*/)
     ]
   },
   "params": {
-    "cacheID": "b04e112737c15989ebd0da1a1aa477e8",
+    "cacheID": "79385fdb815f9adc67b44d2719f7a81a",
     "id": null,
     "metadata": {},
     "name": "CompanyDetailQuery",
     "operationKind": "query",
-    "text": "query CompanyDetailQuery(\n  $id: ID!\n  $jobID: ID!\n) {\n  company(id: $id) {\n    id\n    name\n    description\n    jobs {\n      id\n      title\n    }\n  }\n  ...CompanyDetailJob_data_3SJDCk\n}\n\nfragment CompanyDetailJob_data_3SJDCk on Query {\n  job(id: $jobID) {\n    title\n    id\n  }\n}\n"
+    "text": "query CompanyDetailQuery(\n  $id: ID!\n) {\n  company(id: $id) {\n    id\n    name\n    description\n    jobs {\n      id\n      title\n    }\n  }\n}\n"
   }
 };
 })();

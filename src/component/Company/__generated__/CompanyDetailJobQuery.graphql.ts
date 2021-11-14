@@ -22,12 +22,13 @@ export type CompanyDetailJobQuery = {
 /*
 query CompanyDetailJobQuery(
   $id: ID!
+  $isFetchable: Boolean = false
 ) {
   ...CompanyDetailJob_data_1jZJ9d
 }
 
 fragment CompanyDetailJob_data_1jZJ9d on Query {
-  job(id: $id) {
+  job(id: $id) @include(if: $isFetchable) {
     title
     id
   }
@@ -42,7 +43,7 @@ var v0 = [
     "name": "id"
   },
   {
-    "defaultValue": true,
+    "defaultValue": false,
     "kind": "LocalArgument",
     "name": "isFetchable"
   }
@@ -82,43 +83,50 @@ return {
     "name": "CompanyDetailJobQuery",
     "selections": [
       {
-        "alias": null,
-        "args": [
-          (v1/*: any*/)
-        ],
-        "concreteType": "Job",
-        "kind": "LinkedField",
-        "name": "job",
-        "plural": false,
+        "condition": "isFetchable",
+        "kind": "Condition",
+        "passingValue": true,
         "selections": [
           {
             "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "title",
-            "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "id",
+            "args": [
+              (v1/*: any*/)
+            ],
+            "concreteType": "Job",
+            "kind": "LinkedField",
+            "name": "job",
+            "plural": false,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "title",
+                "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "id",
+                "storageKey": null
+              }
+            ],
             "storageKey": null
           }
-        ],
-        "storageKey": null
+        ]
       }
     ]
   },
   "params": {
-    "cacheID": "557d994cc3823f67ce764c845d9f26bc",
+    "cacheID": "4b4fb68bca934cf79fc0865613de61d8",
     "id": null,
     "metadata": {},
     "name": "CompanyDetailJobQuery",
     "operationKind": "query",
-    "text": "query CompanyDetailJobQuery(\n  $id: ID!\n) {\n  ...CompanyDetailJob_data_1jZJ9d\n}\n\nfragment CompanyDetailJob_data_1jZJ9d on Query {\n  job(id: $id) {\n    title\n    id\n  }\n}\n"
+    "text": "query CompanyDetailJobQuery(\n  $id: ID!\n  $isFetchable: Boolean = false\n) {\n  ...CompanyDetailJob_data_1jZJ9d\n}\n\nfragment CompanyDetailJob_data_1jZJ9d on Query {\n  job(id: $id) @include(if: $isFetchable) {\n    title\n    id\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '2cd16693c38f5634865c9a1da7822ede';
+(node as any).hash = '907a41712e7366ddbe39d1aaf28b4c62';
 export default node;
