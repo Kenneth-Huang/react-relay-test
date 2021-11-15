@@ -24,7 +24,7 @@ type CompanyDetailJobPropsType = {
 
 const CompanyDetailJob: React.FC<CompanyDetailJobPropsType> = (props) => {
 	// const { jobs } = props;
-	const [data, refetch] = useRefetchableFragment<CompanyDetailJobQuery, any>(query, props.job);
+	const [data, refetch] = useRefetchableFragment<CompanyDetailJobQuery, CompanyDetailJob_data$key>(query, props.job);
 	
 	const refetchJob = () => {
 		// debugger
