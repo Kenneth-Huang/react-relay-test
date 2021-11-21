@@ -71,7 +71,6 @@ const DisableSwitch: React.FC<DisableSwitchProps> = ({ checked }) => {
 		}
 	return (<Switch
 		// focusVisibleClassName={classes.focusVisible}
-		disableRipple
 		disabled
 		checked={checked}
 		classes={classes}

@@ -65,9 +65,8 @@ export default function CustomizedSwitch() {
 		  </FormGroup> */}
 		  <span>Off</span>
 		  <Switch
-		  checked={state.checkedA}
-		// checked={false}
-
+			  checked={state.checkedA}
+			  disableRipple
 			  onChange={handleChange}
 			// disabled={true}
 		  name="checkedA"
