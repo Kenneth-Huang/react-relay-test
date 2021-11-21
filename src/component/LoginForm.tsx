@@ -1,20 +1,30 @@
-import React from 'react'
+import React, {useState} from 'react'
+import Typography from '@material-ui/core/Typography';
 import { Formik, Form, Field, } from 'formik'
 // import * as EmailValidator from 'email-validator'
 import * as yup from 'yup'
-import {
-	Box,
-	TextField,
-  } from '@mui/material';
+// import {
+// 	Box,
+// 	TextField,
+//   } from '@mui/material';
+import { Box, TextField, Grid } from '@material-ui/core'
+import CustomizedSwitch from './switch/CustomizeSwitch'
+import AntSwitch from './switch/AntSwitch'
+import DisableSwitch from './switch/DisableSwitch'
 
 type LoginFormProps = any;
 
 const LoginForm: React.FC<LoginFormProps> = props => {
-	const {setLooggedIn, history} = props
+	const { setLooggedIn, history } = props
+	const [switchState, setSwitchState] = useState(false)
+	const handleSwitchChange = () => {
+		setSwitchState(!switchState);
+	  };
 	const handleLogin = () => {
 		setLooggedIn(true);
 		history.push('/');
 	}
+
 	// console.log('props', props)
 	const validationSchema = yup.object({
 		email: yup
@@ -96,8 +106,27 @@ const LoginForm: React.FC<LoginFormProps> = props => {
 									helperText={(Boolean(errors.password && touched.password)) && errors.password}
 							  />
 							</Box>
-					<button type="submit" disabled={isSubmitting}>Submit</button>
-				  </Form>
+						  <button type="submit" disabled={isSubmitting}>Submit</button>
+						  <div>
+						  <Typography component="div">
+						  
+						  <Grid item>
+									  <span>Off</span>
+									  <AntSwitch
+										//   disabled={true}
+										  checked={switchState}
+										  onChange={handleSwitchChange}
+										  name="checkedC" />
+									  <span>On1</span>
+						  </Grid>
+						  
+							  </Typography>
+							  <CustomizedSwitch/>
+							  <DisableSwitch checked={ true}/>
+						  </div>
+					  </Form>
+					  
+					  
 				  );
 				}}
 				
@@ -111,3 +140,4 @@ const LoginForm: React.FC<LoginFormProps> = props => {
 
 
 export default LoginForm
+
